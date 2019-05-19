@@ -1,0 +1,427 @@
+\input{betterheader.tex}
+
+
+\begin{document}
+
+\title{Profinite Groups and their Connection to the p-adic integers}
+\author{Niklas Gassner}
+
+
+\maketitle
+
+\section{Conventions and Notation}
+
+\begin{itemize}
+\item For a group G we denote its neutral element as $e_G$ or, if it is clear in the context, $e$.
+\item If A is an Abelian group, we denote its neutral element as $0_A$ or, if the context allows it, as $0$.
+\item The natural numbers $\mathbb{N}$ include 0.
+\item We denote with $\mathbb{N}_{\geq m}$ the set $\mathbb{N} \setminus \{0,1,...,m-1 \}$.
+\item Unless explicitely mentioned otherwise, homomorphisms are homomorphisms of groups.
+\item All rings are commutative and unitary.
+\item All $R$-modules $M$ are unitary (i.e. $1_R \cdot m = m$ for all $m \in M$).
+\item All homomorphisms of rings preserve the unit.
+\item Let $R$ be a ring. When we refer to the group $R$ we refer to the group $(R, +)$. The (multiplicative) group of units is denoted as $R^*$.
+\item Let $R$ be an integral domain. We denote its field of fraction as $Frac(R)$.
+\item All finite groups are equipped with the discrete topology (i.e. every subset is open).
+\end{itemize}
+
+\newpage
+
+\section{Residually finite groups}
+
+This whole chapter is essentially chapter 2 of \cite{silberstein}.
+
+\begin{definition}
+A group $G$ is called residually finite $: \Leftrightarrow$ for each $g \in G$ there exist a finite group $F$ and a homomorphism $\phi _g$ such that $\phi_g (g) \neq e_F$.
+\end{definition}
+
+\begin{proposition}
+Let $G$ be a group. Then the following conditions are equivalent:
+\begin{enumerate}
+\item $G$ is residually finite
+\item for all $g, h \in G$ with $g \neq h$, there exists a finite group F and a homomorphism $\phi: G \rightarrow F$ such that $\phi(g) \neq \phi(h)$.
+\end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+$"(2) \Rightarrow (1)"$: This follows immediately from the choice $h = e_G$. \newline
+$(1) \Rightarrow (2)"$: Suppose $G$ is residually finite, let $g, h \in G$ such that $g \neq h$.
+Then $gh^{-1} \neq e_G$. As $G$ is residually finite, we find a finite group $F$ and a homomorphism $\phi: G \rightarrow F$ such that $\phi(gh^{-1}) \neq e_F$. Now $\phi(gh^{-1} ) = \phi(g) \phi(h)^{-1}$, so the statement follows.
+\end{proof}
+
+\begin{lemma}
+Let $G$ be a group and $H$ be a subgroup of G. Let $K = \cap_{g \in G}
+gHg^-1$. Then $K$ is a normal subgroup of G contained in $H$. Further, if $H$ is of finite index in $G$, then so is $K$.
+\end{lemma}
+
+\begin{proof}
+Clearly, $K \subset H$. Denote with $Sym(G/H)$ the group of bijections of $G/H$. $G$ acts on $G/H$ by left multiplication, hence induces a homomorphism $\phi: G \rightarrow Sym(G/H)$.
+Notice: $x \cdot gH = gH$ for all $g \in G\Leftrightarrow xgH = gH$ for all $g \in G \Leftrightarrow g^{-1}xg \in H$ for all $g \in G \Leftrightarrow x \in gHg^{-1}$ for all $g\in G$. Hence, $K = ker(\phi)$. So, normality of $K$ follows. \newline Further, we have an induced injective homomorphism $\hat{\phi}: G/K \rightarrow G/H$.  This means that $G/K$ is isomorphic to a subgroup of $G/H$. So, if $H$ is of finite index, so is $K$.
+\end{proof}
+
+\begin{definition}
+Let $G$ be a group. Then the residual group (or profinite kernel) of $G$ is the intersection of all subgroups of finite index of $G$.
+\end{definition}
+
+\begin{proposition}
+Let $G$ be a group with residual subgroup $N$. Then 
+\begin{enumerate}
+\item $N$ is the intersection of all normal subgroups of finite index in $G$.
+\item $N$ is a normal subgroup of $G$.
+\item $G$ is residually finite $\Leftrightarrow N = \{e_G\}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Let $\hat{N}$ be the intersection of all normal subgroups of finite index. \newline
+(1): Clearly $N \subset \hat{N}$. Now, for any subgroup $H \subset G$ of finite index, $K = \cap_{g \in G} gHg^-1$ is, by Lemma 2.3, a normal subgroup of $G$ of finite index. Hence $\hat{N} \subset K \subset H$ and it follows that $\hat{N} \subset N$. \newline
+(2) follows from (1) since the intersection of normal subgroups is again a normal subgroup. \newline
+(3): Assume $G$ is residually finite, pick any $g \in G$ with $g \neq e_G$. There exist a finite group $F$ and a homomorphism $\phi: G \rightarrow F$ with $\phi(g) \neq e_F$. As $G/ker(\phi)$ is isomorphic to a subgroup of $F$, $ker(\phi)$ is of finite index. But $g \not \in ker(\phi)$, so by (1) $g \not \in N$. \newline
+Conversely, assume $N = \{ e_G \}$ and let $g \in G \setminus \{e_G \}$. By (1), there exists a normal subgroup $H$ of finite index such that $g \not \in H$. Then the canonical homomorphism $G \rightarrow G/H$ to a non-neutral element. Thus, $G$ is residually finite.
+\end{proof}
+
+
+\subsection{Construction and classification of residually finite groups} \hfill\\
+
+
+
+We start off by giving some examples of residually finite groups:
+
+\begin{lemma}
+Every finite group is residually finite.
+\end{lemma}
+
+\begin{proof}
+Let $G$ be a finite group, $g \neq e_G$. Then the identity morphism $Id_G: G \rightarrow G$ satisfies $Id_G(g) = g \neq e_G$.
+\end{proof}
+
+\begin{lemma}
+The group $\mathbb{Z}$ is residually finite.
+\end{lemma}
+
+\begin{proof}
+Let $a \in \mathbb{Z}\setminus\{0\}$. Pick $n \in \mathbb{Z}$ with $ | a | < n$. Then the quotient map $\mathbb{Z}$ $\rightarrow \mathbb{Z}/ n\mathbb{Z}$ sends $a$ to a nonneutral element.
+\end{proof}
+
+\begin{lemma}
+The group $GL_n (\mathbb{Z} )$ is residually finite for every $n \in \mathbb{N}$.
+\end{lemma}
+
+\begin{proof}
+Let $A = (a_{ij})_{i,j} \in GL_n( \mathbb{Z})$. Pick an integer $m > | a_{ij} |$ for all $i,j$. Then reduction modulo $m$ sends $A$ to a nonneutral element of $GL_n(\mathbb{Z}/m \mathbb{Z})$.
+\end{proof}
+
+Given residually finite groups, we can construct more residually finite groups:
+
+\begin{lemma}
+Every subgroup of a residual finite group is residually finite.
+\end{lemma}
+
+\begin{proof}
+Let $G$ be residually finite, $H \subset G$ a subgroup, $h \in H \setminus \{ e_H \}$. There exists a finite group $F$ and a homomorphism $\phi : G \rightarrow F$ such that $\phi (h) \neq e_F$. Then the restriction of $\phi$ to $H$ has the desired properties.
+\end{proof}
+
+\begin{proposition}
+Let $(G_i)_{ i \in I}$ be a family of residually finite groups. Then their product $G = \prod_{n \in I} G_i$ is residually finite.
+\end{proposition}
+
+\begin{proof}
+Let , $g=(g_i)_{i \in I} \in G \setminus \{e_G \}$ and for all $i \in I$, let $p_i : G \rightarrow G_i$ be the i'th projection. Then there exists $j \in I$ such that $g_j \neq e_{G_j}$. As $G_j$ is profinite, there exist a finite group $F$ and a homomorphism $\phi : G_j \rightarrow F$ such that $\phi (g_j) \neq e_F$. Then $f := \phi \circ p_j: G \rightarrow F$ satisfies $f(g) = \phi(g_j) \neq e_F$.
+\end{proof}
+
+\begin{corollary}
+Let $(G_i)_{ i \in I}$ be a family of residually finite groups. Then their direct sum $G = \bigoplus_{n \in I} G_i$ is residually finite.
+\end{corollary}
+
+\begin{proof}
+This follows immediately from Lemma 2.9 and Proposition 2.10. 
+\end{proof}
+
+\begin{proposition}
+Every finitely generated Abelian group is residually finite.
+\end{proposition}
+
+\begin{proof}
+Let $A$ be a finitely generated Abelian group. By Structure Theorem for finitely generated Abelian groups, there exist $m,n \in \mathbb{N}, p_1,..., p_m \in \mathbb{Z}$ such that $A \cong \mathbb{Z}/p_1 \mathbb{Z} \times ... \times \mathbb{Z}/p_m \mathbb{Z} \times \mathbb{Z}^n$. The statement then follows from Lemma 2.6, Lemma 2.7 and Proposition 2.10.
+\end{proof}
+
+\begin{proposition}
+Let $G$ be a group. Then the following are equivalent:
+\begin{enumerate}
+\item $G$ is residually finite
+\item there exists a family $(F_i)_{i \in I}$ of finite groups such that $G$ is isomorphic to a subgroup of $\prod_{i \in I} F_i$.
+\end{enumerate}
+
+\end{proposition}
+
+\begin{proof}
+(2) $\Rightarrow$ (1) follows immediately from Lemma 2.6, Lemma 2.9 and Lemma 2.10. \newline
+(1) $\Rightarrow$ (2): Assume $G$ is residually finite. Pick for each $g \in G \setminus \{e_G \}$ a finite group $F_g$ and a morphism $\phi_g: G \rightarrow F_g$ with $\phi_g (g) \neq e_{F_g}$. Then the map $\prod_{g \in G} \phi_g : G \rightarrow \prod_{g \in G} F_g$ is an injective group homomorphism. Hence, $G$ is isomorphic to a subgroup of  $\prod_{g \in G} F_g$.
+\end{proof}
+
+We end the chapter by giving a family of groups that are not residually finite.
+
+\begin{definition}
+A group $G$ is called divisible $: \Leftrightarrow$ for all $g \in G$ and for each $n \in \mathbb{N}_{\geq 1}$ there exists $h \in G$ such that $h^n = g$.
+\end{definition}
+
+\begin{example}
+$\mathbb{Q}$, $\mathbb{R}$ and $\mathbb{C}$ are divisible groups.
+\end{example}
+
+\begin{lemma}
+Let $G$ be a divisible group and $F$ a finite group. Then every homomorphism $\phi: G \rightarrow F$ is trivial.
+\end{lemma}
+
+\begin{proof}
+Let $n = |F|$, $g, h \in G$ such that $h^n = g$. Then $\phi(g) = \phi(h^n) = \phi(h)^n = e_F$ by Lagrange's Theorem.
+\end{proof}
+
+\begin{corollary}
+Let $K$ be a group. Assume there exist a divisible group $G$ and an injective homomorphism $i: G \rightarrow K$. Then $K$ is not residually finite.
+\end{corollary}
+
+\begin{proof}
+It follows from Lemma 2.16 that $G$ is not residually finite. Thus, $i(G)$ is a subgroup of $K$ that is not residually finite. The statement now follows from Lemma 2.9.
+\end{proof}
+
+\subsection{Digression: Limits in projective systems of Groups and Rings} \hfill\\
+
+The following subsection is partially taken from \cite[pages 380/381]{silberstein}.
+
+\begin{definition}
+A projective system of groups (rings) is the following data:
+\begin{itemize}
+\item a directed set $I$;
+\item a family of groups (rings) $(G_i)_{i \in I}$;
+\item for all $ i \leq j \in I$ a homomorphism of groups (rings) $\phi_{ij}: G_j \rightarrow G_i$ such that \begin{enumerate}
+\item $\phi_{ii} = Id_{G_i}$.
+\item $\phi_{ij} \circ \phi_{jk} = \phi_{ik}$ for all $i \leq j \leq k \in I$.
+\end{enumerate}
+\end{itemize}
+\end{definition}
+
+\begin{notation}
+We denote a projective system as in definition 2.18 with $(G_i, \phi_{ij})$.
+\end{notation}
+
+\begin{example}
+Fix some $m \in \mathbb{Z}$ and define $R_n := \mathbb{Z} /m^i \mathbb{Z}$ for all $i \in \mathbb{N}_{\geq 1}$. For $ i \leq j$ denote with $\pi_{ij}: \mathbb{Z} /m^j \mathbb{Z} \rightarrow \mathbb{Z} /m^i \mathbb{Z}$ reduction modulo $m^i$. 
+Then $(R_i, \pi{ij})$ is a projective system of rings.
+\end{example}
+
+\begin{definition}
+Let  $(G_i, \phi_{ij})$ be a projective system of groups (rings). We define the projective limit $G$ of  $(G_i, \phi_{ij})$ as \newline
+\begin{center}
+$G := \{ (g_i)_{i \in I} \in \prod_{i \in I} G_i : \phi_{ij} (g_j) = g_i$ for all $i \leq j \in I \}$.
+\end{center}
+\end{definition}
+
+\begin{notation}
+We denote a projective limit as in 2.21 with $\varprojlim G_i$.
+\end{notation}
+
+\begin{remark}
+With componentwise multiplication (componentwise addition and multiplication), $\varprojlim G_i$ is a subgroup (subring) of $\prod_{i \in I} G_i$.
+\end{remark}
+
+\begin{corollary}
+With notation as in definition 2.21, the following diagram commutes for all $i \leq j \in I$: \newline
+\begin{center}
+%ld: left then down, "pi_j" is label, swap means label on other side of arrow, math mode always on in pikz
+\begin{tikzcd}
+ & \varprojlim G_i  \arrow[ld, "\pi_j", swap] \arrow[rd, "\pi_i"] & \\
+ G_j \arrow[rr, "\phi_{ij}", swap] & & G_i
+\end{tikzcd}
+\end{center}
+\end{corollary}
+
+The projective limit has the following universal property:
+
+\begin{theorem}
+With notation as in definition 2.21, let $H$ be a group (ring) and for all $i \in I$ let $\psi_i: H \rightarrow G_i$ be a homomorphism of groups (rings) such that for all $i \leq j \in I$ $\phi_{ij} \circ \psi_j = \psi_i$. Then there exists a unique homomorphism $u$ of groups (rings) making the following diagram commute: \newline
+\begin{center}
+\begin{tikzcd}
+ & H \arrow[ldd, "\psi_j", swap, bend right] \arrow[rdd, "\psi_i", bend left] \arrow[d, "u", dashed] & \\
+ & \varprojlim G_i  \arrow[ld, "\pi_j", swap] \arrow[rd, "\pi_i"] & \\
+ G_j \arrow[rr, "\phi_{ij}", swap] & & G_i
+\end{tikzcd}
+\end{center}
+
+\end{theorem}
+
+\begin{proof}
+For any $h \in H$ define $u(h) := ( \psi_i(h))_{i \in I}$. \newline
+\begin{itemize}
+\item Well-definedness: We need to show that $u(h):= ( \psi_i(h))_{i \in I} \in \varprojlim G_i$. This follows immediately from  $\phi_{ij} \circ \psi_j  = \psi_i$ for all $i \leq j \in I$.
+\item $u$ is a homomorphism of groups (rings) since so is $\psi_i$ for all $i \in I$.
+\item Uniqueness: Let $\hat{u}$ be another such homomorphism, $h \in H$. Then we have $\pi_i (\hat{u} (h)) = \psi_i (h)$ for all $i \in I$. Hence $\hat{u} (h) = (\psi_i (h))_{i \in I}$ which implies $\hat{u} = u$.
+\end{itemize}
+\end{proof}
+
+As it is with universal properties, if $K$ is another group with the universal property described in 2.25, $K \cong \varprojlim G_i$. 
+
+\subsection{Final results about residually finite groups} 
+
+\begin{corollary}
+Let $(G_i, \phi_{ij} )$ be a projective system of residually finite groups. Then $\varprojlim G_i$ is residually finite.
+\end{corollary}
+
+\begin{proof}
+This follows immediately from Lemma 2.9, Proposition 2.10 and Remark 2.23.
+\end{proof}
+
+\begin{definition}
+A group $G$ is profinite $: \Leftrightarrow$ $G$ is the limit of a projective system of residually finite groups.
+\end{definition}
+
+\begin{corollary}
+Every profinite group is residually finite
+\end{corollary}
+
+For our final definition in this section, we need the following result:
+
+\begin{lemma}
+Let $G$ be a group, $\mathcal{N}_{f,G} := \{ N \, : \, N$ is a normal subgroup of $G$ of finite index$\}$, partially ordered by inverse inclusion. Then $\mathcal{N}_{f,G}$ is a directed set.
+\end{lemma}
+
+\begin{lemma}
+With notation as in 2.29, let for all $H \subset K \in \mathcal{N}_{f, G}$ $\phi_{K,H} : G / H \rightarrow G/K$ be the canonical homomorphism. Then $( (G/H)_{H \in \mathcal{N}_{f, G} }, \phi_{K,H} )$ is a projective system of groups.
+\end{lemma}
+
+\begin{definition}
+Let $G$ be a group and let notation be as in 2.29. Then the profinite completion of $G$ is defined as the inverse limit of $( (G/H)_{H \in \mathcal{N}_{f, G} }, \phi_{K,H} )$.
+\end{definition}
+
+\begin{notation}
+Given a group $G$, we denote its profinite completion as $\hat{G}$.
+\end{notation}
+
+
+\newpage
+
+\section{ The p-adic integers} \hfill \\
+
+Let $m \in \mathbb{Z}$. Recall the projective system $( \mathbb{Z} /m^i \mathbb{Z}, \pi_{ij} )$ from Example 2.20.
+
+\begin{definition}
+The ring of m-adic integers are defined as $\varprojlim \mathbb{Z} / m^i \mathbb{Z}$.
+\end{definition}
+
+\begin{notation}
+We denote the m-adic integers as $\mathbb{Z}_m$.
+\end{notation}
+
+Note that for both $m \in \{-1, 1\}$, we have $\mathbb{Z}_m \cong \{ 0 \}$. Further, the case $m = 0$ gives $\mathbb{Z}_m \cong \mathbb{Z}$. So, we may assume from now on that $m \in \mathbb{Z} \setminus \{ -1, 0, 1 \}$.
+
+\begin{lemma}
+The map
+\begin{align*} i : \mathbb{Z} & \longrightarrow \mathbb{Z}_m \\ a & \longmapsto i(a) = (a \; mod \; (m^k))_{k \in \mathbb{N}_{\geq 1} }
+\end{align*}
+is an embedding of rings.
+\end{lemma}
+
+\begin{proof}
+$i$ is clearly a homomorphism of rings and satisfies $i(1_{\mathbb{Z}}) = 1_{\mathbb{Z}_m}$. Further, $i(a) = 0_{\mathbb{Z}_m } \Leftrightarrow a \in \cap_{k \in \mathbb{N}_{ \geq 1 } } m^k \mathbb{Z} = \{ 0 \}$, so $i$ is injective.
+\end{proof}
+
+\begin{notation}
+If $a \in \mathbb{Z}$ and $b \in \mathbb{Z}_m$, we make abuse of notation and write $a + b$ (or $a \cdot b$ and so on) for $i(a) + b$ (or $i(a) \cdot b$).
+\end{notation}
+
+We will first study the case of p-adic integers where $p \in \mathbb{Z}$ is a prime number.
+\begin{proposition}
+$\mathbb{Z}_p$ is an integral domain.
+\end{proposition}
+
+\begin{proof}
+Assume, by contradiction, that there exist nonzero $a = (a_k )_{k \in \mathbb{N} \geq 1}$,$b = (b_k \,)_{k \in \mathbb{N} \geq 1 } \in \mathbb{Z}_p$ with $a \cdot b = 0$. Let $n \in \mathbb{N} \geq 1$ be minimal with $a_n  \neq 0 \neq b_n$. Then there exist $u, \hat{u} \in \mathbb{Z} / p^n \mathbb{Z}^*$, $1 \leq k_1, k_2 < n$ with $a_n = up^{k_1}$, $b_n = \hat{u} p^{k_2}$. \newline
+Now, consider $a_{2n + 1}$, $b_{2n+1}$. If $a_{2n+1} = 0$ or $b_{2n+1} = 0$, we obtain $a_n = a_{2n+1} \, mod(p^n) = 0$ or $b_n = b_{2n+1} \, mod (p^n) = 0$, a contradiction. Hence, there exist $u', \tilde{u} \in \mathbb{Z} / p^{2n+1} \mathbb{Z}^*$, $1 \leq l_1, l_2 < 2n+1$ with $a_n = u'p^{l_1}$, $b_n = \tilde{u} p^{l_2}$. $a_{2n+1} \cdot b_{2n+1} = 0$ forces $l_1 + l_2 \geq 2n+1$. So we may assume that $l_1 \geq n+1$. But then $a_n = a_{2n+1} \, mod(p^n) = u'p^{l_1} \, mod(p^n) = 0$, a contradiction. 
+\end{proof}
+
+\begin{definition}
+We define the p-adic numbers as $Frac( \mathbb{Z}_p )$.
+\end{definition}
+
+\begin{notation}
+We denote the p-adic numbers as $ \mathbb{Q}_p$.
+\end{notation}
+
+\begin{corollary}
+We have an embedding of fields $ \mathbb{Q} \hookrightarrow \mathbb{Q}_p$.
+\end{corollary}
+
+\begin{proof}
+As $\mathbb{Q} = Frac( \mathbb{Z} )$, the statement follows from the universal property of fields of fractions and Lemma 3.3.
+\end{proof}
+
+We go back to studying general case $m \in \mathbb{Z} \setminus \{-1,0,1 \}$. \\~\\
+
+\begin{lemma}
+$\mathbb{Z}_{m^n} \cong \mathbb{Z}_m$.
+\end{lemma}
+
+\begin{proof} 
+Denote with $\pi_{i,j}: \mathbb{Z} / p^j \mathbb{Z} \rightarrow \mathbb{Z} / p^i \mathbb{Z}$ the canonical map.
+Define \begin{align*} \phi: \mathbb{Z}_{m^n} & \longrightarrow \mathbb{Z}_m\\ (a_k + p^{kn}\mathbb{Z})_{k \in \mathbb{N}_{\geq 1}}& \longmapsto (\pi_{i, n \lceil \frac{i}{n} \rceil} (a_{n \lceil \frac{i}{n} \rceil} + p^{n \lceil \frac{i}{n} \rceil} \mathbb{Z} ))_{i \in \mathbb{N}_{\geq 1}}
+\end{align*}
+This is clearly a homomorphism of rings with inverse given by 
+\begin{align*} \phi^{-1}: \mathbb{Z}_m & \longrightarrow \mathbb{Z}_{m^n}\\ (a_k + p^k\mathbb{Z})_{k \in \mathbb{N}_{\geq 1}}& \longmapsto ( a_{ni} + p^{ni} \mathbb{Z} )_{i \in \mathbb{N}_{\geq 1}} 
+\end{align*}
+\end{proof}
+
+
+Recall the following fact, known as Chinese Remainder Theorem: \newline
+Given coprime $a,b \in \mathbb{Z} \ \{ -1, 0, 1 \}$ we have an isomorphism of rings
+\begin{align*} \phi: \mathbb{Z} /ab \mathbb{Z} & \longrightarrow \mathbb{Z} / a \mathbb{Z} \times \mathbb{Z} /b \mathbb{Z} \\ x & \longmapsto (x \, mod (a), x \, mod (b))
+\end{align*}
+
+It is important to know how $\phi ^{-1}$ is constructed: \newline
+As $a,b$ are coprime, we can find $c,d \in \mathbb{Z}$ such that $ac + bd = 1$. Then, $\phi ^{-1} (x_1, x_2) := x_1 bd + x_2 ac$.
+
+\begin{theorem}
+Let $m,m \in \mathbb{Z} \ \{ -1, 0, 1 \}$ be coprime. Then $\mathbb{Z}_{mn} \cong \mathbb{Z}_m \times \mathbb{Z}_n$ as rings.
+\end{theorem}
+
+\begin{proof}
+For all $k \in \mathbb{N}_{ \geq 1}$, let $\phi_k: \mathbb{Z} /(mn)^k \mathbb{Z} \xrightarrow{\sim } \mathbb{Z} / m^k \mathbb{Z} \times \mathbb{Z} / n^k \mathbb{Z} $ be the isomorphism given by the Chinese Remainder Theorem. Then $\prod_{k \in \mathbb{N}_ {\geq 1}} \phi_k : \prod_{k \in \mathbb{N} \geq 1 } \mathbb{Z} / (mn)^k \mathbb{Z} \rightarrow \prod _{k \in \mathbb{N}_{ \geq 1} } \mathbb{Z} / m^k \mathbb{Z} \times \mathbb{Z} / n^k \mathbb{Z} $ is an isomorphism of rings. Further, $\prod _{k \in \mathbb{N}_{ \geq 1} } \mathbb{Z} / m^k \mathbb{Z} \times \mathbb{Z} / n^k \mathbb{Z} $ is canonically isomorphic to $\prod _{k \in \mathbb{N}_{ \geq 1} } \mathbb{Z} / m^k \mathbb{Z} \times \prod _{k \in \mathbb{N}_{ \geq 1} } \mathbb{Z} / n^k \mathbb{Z} $. Denote with $\phi$ the composition of these two isomorphisms. \\~\\
+\underline{Claim}: $\phi( \mathbb{Z}_{mn} ) \subset \mathbb{Z}_m \times \mathbb{Z}_n$ and $\phi^{-1} (\mathbb{Z}_m \times \mathbb{Z}_n) \subset \mathbb{Z}_{mn}$. \newline
+\underline{Proof}: The first inclusion is clear. Consider the second one: Let $( (x_k)_{ k \in \mathbb{N}_{\geq 1 } },(y_k)_{ k \in \mathbb{N}_{\geq 1 } }) \in \mathbb{Z}_m \times \mathbb{Z}_n$. For all $k \in \mathbb{N}_{ \geq 1 }$, we find $ c_k, d_k \in \mathbb{Z}$ such that $m^k c_k + m^k d_k = 1$. Then $\phi ^{-1} (( (x_k)_{ k \in \mathbb{N}_{\geq 1 } },(y_k)_{ k \in \mathbb{N}_{\geq 1 } }) = (x_k n^k d_k + y_k m^k c_k)_{k \in \mathbb{N}_{ \geq 1 } }$. \newline 
+\underline{Subclaim}: Let $i \in \mathbb{N}_{\geq 2}$. Then $n^i d_i \equiv n^{i-1} d_{i-1} \, mod (m^{i-1})$ and $m^i c_i \equiv m^{i-1} c_{i-1} \, mod(n^{i-1} )$. \newline
+\underline{Proof of the Subclaim}: We have $m^i c_i + n^i d_i = 1 = m^{i-1} c_{i-1} + n^{i-1} d_{i-1}$. Reducing modulo $(m^{i-1} )$ on both sides yields the first equality, reducing modulo $(n^{i-1})$ on both sides the second one.\newline
+Back to our initial claim, we fix some $i \in \mathbb{N}_{\geq 2}$. Then $x_i n^i d_i +  y_i m^i c_i  \equiv x_i n^i d_i \equiv x_{i-1} n^i d_i \, mod(m ^{i-1} )$, where we used that $x_i \equiv x_{i-1} \, mod (m ^{i-1})$. Now $x_{i-1} n^i d_i$ \newline $\equiv x_{i-1} n^{i-1} d_{i-1} \, mod( m^{i-1} )$ from our subclaim. Similarily, we prove that $x_i n^i d_i +  y_i m^i c_i  \equiv x_{i-1} n^{i-1} d_{i-1} + y_{i-1} m^{i-1} c_{i-1} \, mod(n^{i-1})$. \newline Thus $(x_i n^i d_i +  y_i m^i c_i)  - (x_{i-1} n^{i-1} d_{i-1} + y_{i-1} m^{i-1} c_{i-1}) \in m^{i-1} \mathbb{Z} \cap n^{i-1} \mathbb{Z} = (mn)^{i-1} \mathbb{Z}$, which translates to $(x_i n^i d_i +  y_i m^i c_i)  \equiv (x_{i-1} n^{i-1} d_{i-1} + y_{i-1} m^{i-1} c_{i-1}) \, mod( (mn)^{i-1} )$, from which the claim follows.
+\\~\\
+It follows that $ \phi |_{ \mathbb{Z}_{mn} } : \mathbb{Z}_{mn} \rightarrow \mathbb{Z}_m \times \mathbb{Z}_n$ is an isomorphism of rings with inverse $\phi^{-1} |_{ \mathbb{Z}_m \times \mathbb{Z}_n }$.
+
+\end{proof}
+
+\begin{corollary}
+Let $m \in \mathbb{Z} \setminus \{ -1,0, \}$. Then: $m$ is a prime power  $\Leftrightarrow \mathbb{Z}_m$ is an integral domain.
+\end{corollary}
+
+\begin{proof}
+"$\Rightarrow$": Follows immediately from Proposition 3.5 and Lemma 3.9. \newline
+"$\Leftarrow$": Assume, by contraposition, that $m$ is not a prime power. Then there exist coprime $a,b \in \mathbb{Z} \setminus \{-1, 0,1 \}$ such that  $m = a \cdot b$. Then by Theorem 3.10, $\mathbb{Z}_m \cong \mathbb{Z}_a \times \mathbb{Z}_b$, which has nonzero zerodivisors.
+\end{proof}
+
+\subsection{The group $\mathbb{Z}_p$} \hfill\\
+
+In this subsection, we investigate the properties of the group $(\mathbb{Z}_p, +)$, which we will simply denote as $\mathbb{Z}_p$.
+
+\begin{corollary}
+$\mathbb{Z}_p$ is residually finite.
+\end{corollary}
+
+\begin{proof}
+This follows immediately from Lemma 2.6 and Corollary 2.26.
+\end{proof}
+
+\subsection{ Topological properties of $\mathbb{Z}_p$}
+
+
+\printbibliography
+
+
+
+\end{document}
